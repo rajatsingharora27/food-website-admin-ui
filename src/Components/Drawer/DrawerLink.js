@@ -8,7 +8,7 @@ export const drawerLinks = [
     id: 1,
     icon: <MdOutlineSpaceDashboard />,
     title: "Dashboard",
-    link: "/dashboard",
+    link: "/",
   },
   {
     id: 2,

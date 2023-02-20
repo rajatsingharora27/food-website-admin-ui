@@ -1,16 +1,17 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
+import Mainlayout from "../Components/MainLayout/Mainlayout";
 import CreateProduct from "../Pages/CreateProduct/CreateProduct";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 
 const routerApp = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Mainlayout />,
 
     children: [
       {
-        path: "/dashboard",
+        path: "/",
         element: <Dashboard />,
       },
       {
@@ -19,6 +20,15 @@ const routerApp = createBrowserRouter([
       },
     ],
   },
+
+  // {
+  //   path: "/",
+  //   element: <Dashboard />,
+  // },
+  // {
+  //   path: "/createProduct",
+  //   element: <CreateProduct />,
+  // },
 ]);
 
 export default routerApp;

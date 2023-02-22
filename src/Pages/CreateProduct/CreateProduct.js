@@ -12,8 +12,10 @@ const CreateProduct = () => {
 
   return (
     <div className=" w-full h-full bg-[#f5f8fa] ">
-      <div>
-        <h1 className="font-sans font-bold py-4 md:p-9 ">Product Form</h1>
+      <div className="flex justify-start m-5">
+        <h1 className="font-sans font-bold text-2xl py-4 md:p-9  uppercase ">
+          Product Form
+        </h1>
       </div>
       <div className="flex flex-col md:flex-row justify-center ">
         {/*-------------------------- Left column for small screens ------------------------*/}
@@ -38,9 +40,14 @@ const CreateProduct = () => {
           <LargeCard />
         </div>
       </div>
-      <Button type="submit" onClick={showPayload}>
-        Submit
-      </Button>
+      <div className=" flex justify-end  ">
+        <button
+          type="submit"
+          class="text-white text-lg font-sans m-4 md:m-7 lg:m-8  bg-[var(--background-color)] rounded opacity-75 p-3 shadow-lg hover:bg-[#aef1da] transition-all ease-in-out"
+        >
+          Save Changes
+        </button>
+      </div>
     </div>
   );
 };

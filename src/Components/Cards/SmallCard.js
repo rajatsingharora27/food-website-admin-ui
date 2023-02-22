@@ -11,7 +11,7 @@ const SmallCard = ({
   isThumbnailImage,
 }) => {
   return (
-    <div className="flex flex-col m-5 shadow-[0px_4px_20px_10px_#00000024] md:w-[35vw] rounded-md bg-[var(--card-background-color)]">
+    <div className="flex flex-col p-5 m-5 shadow-[0px_4px_20px_10px_#00000024] md:w-[35vw] rounded-md bg-[var(--card-background-color)]">
       <h1 className="m-2 text-xl font-medium leading-tight text-neutral-800 ">
         {title}
       </h1>

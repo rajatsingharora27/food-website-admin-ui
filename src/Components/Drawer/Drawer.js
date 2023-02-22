@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { changeActiveComponent } from "../../Redux/Slices/activeComponet";
 import { drawerLinks } from "./DrawerLink";
+import { changeOpenStatus } from "../../Redux/Slices/sideBar";
 
 //bg-[var(--background-color)]
 const Drawer = () => {
@@ -16,6 +17,9 @@ const Drawer = () => {
   const handleCurrentActiveDispatch = (id) => {
     dispatch(changeActiveComponent(id));
   };
+  const closeDrawer = () => {
+    dispatch(changeOpenStatus(isSideBarOpen));
+  };
 
   return (
     <nav
@@ -27,7 +31,7 @@ const Drawer = () => {
         {drawerLinks.map((ele) => {
           //   console.log(ele);
           return (
-            <Link to={ele.link} key={ele.id}>
+            <Link to={ele.link} key={ele.id} onClick={closeDrawer}>
               <div
                 onClick={() => handleCurrentActiveDispatch(ele.id)}
                 className={`flex items-center justify-start space-x-8 px-5 cursor-pointer group hover:border-[var(--background-color)]  border-l-4 border-transparent py-2 ${

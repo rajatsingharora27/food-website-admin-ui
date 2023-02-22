@@ -2,8 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+    margin: 0;
+    padding: 0;
+    
+}
 :root{
     --background-color:#acdccb;
     --navBarHover-color:#c7b299;
-    --page-background-color:#E4E6EF;
+    --page-background-color: #f5f8fa;;
+    --card-background-color: #ffffff;
+
 }
+

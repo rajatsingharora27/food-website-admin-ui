@@ -22,7 +22,7 @@ const LargeCard = () => {
       </h1>
       <div className="flex flex-col px-4">
         <label
-          for="productName"
+          htmlFor="productName"
           className=" font-sans font-semibold text-black text-sm m-3 ml-0"
         >
           Product Name

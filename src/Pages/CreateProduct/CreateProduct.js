@@ -43,7 +43,8 @@ const CreateProduct = () => {
       <div className=" flex justify-end  ">
         <button
           type="submit"
-          class="text-white text-lg font-sans m-4 md:m-7 lg:m-8  bg-[var(--background-color)] rounded opacity-75 p-3 shadow-lg hover:bg-[#aef1da] transition-all ease-in-out"
+          className="text-white text-lg font-sans m-4 md:m-7 lg:m-8  bg-[var(--background-color)] rounded opacity-75 p-3 shadow-lg hover:bg-[#aef1da] transition-all ease-in-out"
+          onClick={showPayload}
         >
           Save Changes
         </button>

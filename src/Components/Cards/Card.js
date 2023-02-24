@@ -1,4 +1,3 @@
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import "../../index.css";
 import axios from "axios";
@@ -12,31 +11,30 @@ const SmallCard = ({
   showDropDown,
   showFieldDescription,
   isThumbnailImage,
+  inputField,
+  isTextArea,
+  categoryDropDownData,
 }) => {
-  const [dropDownData, setDropDownData] = useState([]);
   const dispatch = useDispatch();
-
-  const getDropDownData = async () => {
-    console.log(
-      `${
-        process.env.TUILERIES_BASE_URL /
-        process.env.API_VERSION /
-        process.env.GET_ALL_CATEGORY
-      }`
-    );
-    const CategoryData = await axios.get(
-      "http://localhost:3003/api/v1/allCategory"
-    );
-    setDropDownData(CategoryData?.data?.data);
-  };
-
-  useEffect(() => {
-    getDropDownData();
-  }, []);
 
   const handleSelection = (e) => {
     console.log(e.target.value);
     dispatch(updateProductDetails({ typeOfproduct: e.target.value }));
+  };
+  const handleChange = (payloadField) => (e) => {
+    switch (payloadField) {
+      case "name":
+        dispatch(updateProductDetails({ name: e.target.value }));
+        break;
+      case "price":
+        dispatch(updateProductDetails({ price: e.target.value }));
+        break;
+      case "description":
+        dispatch(updateProductDetails({ description: e.target.value }));
+        break;
+      default:
+        console.log(e.target.value);
+    }
   };
 
   return (
@@ -45,6 +43,52 @@ const SmallCard = ({
         <h1 className="m-2 text-xl font-medium leading-tight text-neutral-800 ">
           {title}
         </h1>
+        {console.log(inputField?.inputArray?.onChangeInput)}
+        {inputField?.inputArray.map((ele, i) => {
+          return (
+            <div className="flex flex-col px-4" key={i}>
+              <label
+                htmlFor={ele?.id}
+                className=" font-sans font-semibold text-black text-sm m-3 ml-0"
+              >
+                {ele?.label}
+              </label>
+              <input
+                type="text"
+                className="peer ml-3 block h-11 w-4/5 rounded border border-solid border-neutral-300 bg-white bg-clip-padding py-4 px-3 text-base font-normal leading-tight  ease-in-out placeholder:text-transparent focus:border-primary focus:bg-white"
+                id={ele?.id}
+                placeholder={ele?.placeholder}
+                onChange={handleChange(ele?.key)}
+
+                // onChange={getProductName}
+              />
+              <p className="font-sans font-medium text-gray-400 text-xs m-3">
+                {ele?.informationText}
+              </p>
+            </div>
+          );
+        })}
+
+        {isTextArea && (
+          <div className="flex flex-col mt-4 px-4">
+            <label
+              className="font-sans font-medium text-black text-sm my-4 "
+              id="description"
+            >
+              Description
+            </label>
+            <textarea
+              rows={10}
+              cols={40}
+              className="rounded-lg border p-2 border-gray-300 text-base font-normal leading-tight  ease-in-out placeholder:text-transparent focus:border-primary focus:bg-white  "
+              onChange={handleChange("description")}
+            ></textarea>
+            <p className="font-sans font-medium text-gray-400 text-xs m-3">
+              Something about your product
+            </p>
+          </div>
+        )}
+
         <div className="flex flex-col ">
           {isThumbnailImage && (
             <div className="flex items-center justify-center w-full">
@@ -89,7 +133,7 @@ const SmallCard = ({
               <option value="DEFAULT" disabled>
                 Category...
               </option>
-              {dropDownData.map((catergory) => {
+              {categoryDropDownData?.map((catergory) => {
                 return (
                   <option
                     key={catergory._id}

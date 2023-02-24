@@ -1,14 +1,33 @@
-import React from "react";
-import SmallCard from "../../Components/Cards/SmallCard";
-import LargeCard from "../../Components/Cards/LargeCard";
-import { Button } from "@mui/material";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Card from "../../Components/Cards/Card";
+// import LargeCard from "../../Components/Cards/LargeCard";
 
 const CreateProduct = () => {
   const productToAdd = useSelector((store) => store.newProduct.product);
   const showPayload = () => {
     console.log(productToAdd);
   };
+
+  const [dropDownData, setDropDownData] = useState([]);
+  const getDropDownData = async () => {
+    console.log(
+      `${
+        process.env.TUILERIES_BASE_URL /
+        process.env.API_VERSION /
+        process.env.GET_ALL_CATEGORY
+      }`
+    );
+    const CategoryData = await axios.get(
+      "http://localhost:3003/api/v1/allCategory"
+    );
+    setDropDownData(CategoryData?.data?.data);
+  };
+
+  useEffect(() => {
+    getDropDownData();
+  }, []);
 
   return (
     <div className=" w-full h-full bg-[#f5f8fa] ">
@@ -20,14 +39,15 @@ const CreateProduct = () => {
       <div className="flex flex-col md:flex-row justify-center ">
         {/*-------------------------- Left column for small screens ------------------------*/}
         <div className="flex flex-col">
-          <SmallCard
+          <Card
             title={"Product Details"}
             showButton={true}
             showDropDown={true}
             showFieldDescription={true}
             isThumbnailImage={false}
+            categoryDropDownData={dropDownData}
           />
-          <SmallCard
+          <Card
             title={"Thumbnail Image"}
             showButton={false}
             showDropDown={false}
@@ -37,7 +57,34 @@ const CreateProduct = () => {
         </div>
         {/* ------------------------------Righthand side------------------------------------- */}
         <div className="flex flex-col ">
-          <LargeCard />
+          <Card
+            title={"Basic Information"}
+            showButton={false}
+            showDropDown={false}
+            showFieldDescription={false}
+            isThumbnailImage={false}
+            isTextArea={true}
+            inputField={{
+              inputArray: [
+                {
+                  id: "productName",
+                  label: "Product Name",
+                  key: "name",
+                  informationText:
+                    "A Product name is required and recomended to be unique",
+                  placeholder: "Product Name",
+                  // onChangeInput: { handleInput },
+                },
+                {
+                  label: "Price",
+                  key: "price",
+                  informationText: "Price is cumplusory field",
+                  placeholder: "Enter Price",
+                  // onChangeInput: { handleInput },
+                },
+              ],
+            }}
+          />
         </div>
       </div>
       <div className=" flex justify-end  ">

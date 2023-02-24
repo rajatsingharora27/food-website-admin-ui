@@ -53,6 +53,9 @@ const LargeCard = () => {
           placeholder="Enter Price"
           onChange={getPrice}
         />
+        <p className="font-sans font-medium text-gray-400 text-xs m-3">
+          Price is cumplusory field
+        </p>
       </div>
       <div className="flex flex-col mt-4 px-4">
         <label
@@ -64,9 +67,12 @@ const LargeCard = () => {
         <textarea
           rows={10}
           cols={40}
-          className="rounded-lg border border-gray-300 text-base font-normal leading-tight  ease-in-out placeholder:text-transparent focus:border-primary focus:bg-white  "
+          className="rounded-lg border p-2 border-gray-300 text-base font-normal leading-tight  ease-in-out placeholder:text-transparent focus:border-primary focus:bg-white  "
           onChange={getDescription}
         ></textarea>
+        <p className="font-sans font-medium text-gray-400 text-xs m-3">
+          Something about your product
+        </p>
       </div>
     </div>
   );

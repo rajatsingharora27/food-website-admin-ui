@@ -17,6 +17,8 @@ const createProductSlice = createSlice({
   },
   reducers: {
     updateProductDetails: (state, action) => {
+      console.log(action.payload);
+
       state.product = { ...state.product, ...action.payload };
     },
   },

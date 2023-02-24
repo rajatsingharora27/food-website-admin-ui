@@ -16,6 +16,7 @@ const SmallCard = ({
   categoryDropDownData,
 }) => {
   const dispatch = useDispatch();
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const handleSelection = (e) => {
     console.log(e.target.value);
@@ -32,8 +33,31 @@ const SmallCard = ({
       case "description":
         dispatch(updateProductDetails({ description: e.target.value }));
         break;
+
       default:
         console.log(e.target.value);
+    }
+  };
+
+  const handleFileInputChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+    // console.log(event.target.files[0]);
+
+    // console.log(selectedFile);
+  };
+  const handleFileUpload = async (event) => {
+    try {
+      const formData = new FormData();
+      formData.append("thumbNailImage", selectedFile);
+      const response = await axios.post(
+        "http://localhost:3003/api/v1/uploadImage",
+        formData
+      );
+
+      console.log(response.data.data);
+      dispatch(updateProductDetails({ thumbNailImage: response.data.data }));
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -43,7 +67,7 @@ const SmallCard = ({
         <h1 className="m-2 text-xl font-medium leading-tight text-neutral-800 ">
           {title}
         </h1>
-        {console.log(inputField?.inputArray?.onChangeInput)}
+        {/* {console.log(inputField?.inputArray?.onChangeInput)} */}
         {inputField?.inputArray.map((ele, i) => {
           return (
             <div className="flex flex-col px-4" key={i}>
@@ -91,7 +115,7 @@ const SmallCard = ({
 
         <div className="flex flex-col ">
           {isThumbnailImage && (
-            <div className="flex items-center justify-center w-full">
+            <div className="flex flex-col items-end  w-full">
               <label
                 htmlFor="dropzone-file"
                 className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
@@ -120,8 +144,19 @@ const SmallCard = ({
                     SVG, PNG, JPG or GIF (MAX. 800x400px)
                   </p>
                 </div>
-                <input id="dropzone-file" type="file" className="hidden" />
+                <input
+                  id="dropzone-file"
+                  type="file"
+                  onChange={handleFileInputChange}
+                  className="hidden"
+                />
               </label>
+              <button
+                onClick={handleFileUpload}
+                className="my-5 text-white text-lg font-sans   bg-[var(--background-color)] rounded opacity-75 p-3 shadow-lg hover:bg-[#aef1da] transition-all ease-in-out"
+              >
+                Upload
+              </button>
             </div>
           )}
           {showDropDown && (
@@ -135,10 +170,7 @@ const SmallCard = ({
               </option>
               {categoryDropDownData?.map((catergory) => {
                 return (
-                  <option
-                    key={catergory._id}
-                    value={catergory.name.toUpperCase()}
-                  >
+                  <option key={catergory._id} value={catergory.name}>
                     {catergory.name.toUpperCase()}
                   </option>
                 );

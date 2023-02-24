@@ -6,8 +6,15 @@ import Card from "../../Components/Cards/Card";
 
 const CreateProduct = () => {
   const productToAdd = useSelector((store) => store.newProduct.product);
-  const showPayload = () => {
+
+  const showPayload = async () => {
     console.log(productToAdd);
+    const res = await axios.post(
+      "http://localhost:3003/api/v1/addProduct",
+      productToAdd
+    );
+    console.log(res);
+    alert("Product added sussefully");
   };
 
   const [dropDownData, setDropDownData] = useState([]);
@@ -24,6 +31,8 @@ const CreateProduct = () => {
     );
     setDropDownData(CategoryData?.data?.data);
   };
+
+  const createProduct = async () => {};
 
   useEffect(() => {
     getDropDownData();

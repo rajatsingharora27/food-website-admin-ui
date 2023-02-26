@@ -1,22 +1,9 @@
-import React, { useState } from "react";
-
-import { useDispatch, useSelector } from "react-redux";
-import { addMessageToShow } from "../../Redux/Slices/messageBar";
-import { BiError } from "react-icons/bi";
+import { useSelector } from "react-redux";
 
 const MessageBar = () => {
   const messageBarStatus = useSelector(
     (store) => store.addMessageToShow.messageToDisplay
   );
-  const dispatch = useDispatch();
-
-  const [mesaageBar, setMesaageBar] = useState(true);
-
-  const hideMessageBar = () => {
-    console.log("click");
-    dispatch(addMessageToShow(-1));
-    setMesaageBar(!mesaageBar);
-  };
 
   function scrollUpToPage() {
     if (messageBarStatus.length > 0) {

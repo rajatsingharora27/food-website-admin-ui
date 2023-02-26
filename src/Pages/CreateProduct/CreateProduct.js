@@ -97,7 +97,7 @@ const CreateProduct = () => {
   }, []);
 
   return (
-    <div className={`w-full h-full bg-[#f5f8fa] `}>
+    <div className={`w-full h-full  `}>
       <div className="flex justify-start m-5">
         <h1 className="font-sans font-bold text-2xl py-4 md:p-9  uppercase ">
           Product Form

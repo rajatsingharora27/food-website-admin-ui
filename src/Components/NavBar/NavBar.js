@@ -1,6 +1,7 @@
 import React from "react";
 import { FaList } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { changeOpenStatus } from "../../Redux/Slices/sideBar";
 
 import "../../root.css";
@@ -16,11 +17,13 @@ const NavBar = () => {
   return (
     <>
       <div className="w-auto  shadow-md h-[60px] flex justify-between items-center text-white bg-[var(--background-color)] z-10 md:w-screen">
-        <img
-          src="/images/logo.png"
-          alt="Tuileries "
-          className="flex items-center cursor-pointer w-auto h-8 "
-        />
+        <Link to={"/"}>
+          <img
+            src="/images/logo.png"
+            alt="Tuileries "
+            className="flex items-center cursor-pointer w-auto h-8 "
+          />
+        </Link>
 
         <div className="lg:flex justify-between mx-4 ">
           <FaList className="mx-4 cursor-pointer" onClick={handleSideBarOpen} />

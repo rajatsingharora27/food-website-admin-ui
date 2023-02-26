@@ -1,20 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { changeActiveComponent } from "../../Redux/Slices/activeComponet";
 import { drawerLinks } from "./DrawerLink";
 import { changeOpenStatus } from "../../Redux/Slices/sideBar";
 import { addMessageToShow } from "../../Redux/Slices/messageBar";
-import {
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  useDisclosure,
-} from "@chakra-ui/react";
 
 //bg-[var(--background-color)]
 const DrawerComponet = () => {
@@ -23,8 +13,7 @@ const DrawerComponet = () => {
   let location = useLocation();
   const dispatch = useDispatch();
   const [path, setPath] = useState(location.pathname);
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [placement, setPlacement] = React.useState("left");
+  const ref = useRef(null);
 
   const pageChange = () => {
     if (path !== location.pathname) {
@@ -35,16 +24,14 @@ const DrawerComponet = () => {
   useEffect(() => {
     pageChange();
   });
-  // useEffect(() => {
-  //   closeSideBarOnMouseLeftClick();
-  // }, []);
-  // function closeSideBarOnMouseLeftClick(evt) {
-  //   if (window.event.which === 0) {
-  //     console.log("Inside the useEffect mouse click ", isSideBarOpen);
 
-  //     dispatch(changeOpenStatus(isSideBarOpen));
-  //   }
-  // }
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside, true);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  });
 
   const handleCurrentActiveDispatch = (id) => {
     dispatch(changeActiveComponent(id));
@@ -53,9 +40,19 @@ const DrawerComponet = () => {
     dispatch(changeOpenStatus(isSideBarOpen));
   };
 
+  const handleClickOutside = (event) => {
+    if (!ref.current.contains(event.target)) {
+      // console.log("clicked outside");
+      if (isSideBarOpen) {
+        dispatch(changeOpenStatus(isSideBarOpen));
+      }
+    }
+  };
+
   return (
     <>
       <nav
+        ref={ref}
         className={`fixed h-full top-0 left-0 z-50 bg-white shadow-lg transform transition-all duration-300 ease-in-out ${
           isSideBarOpen ? "translate-x-0" : "-translate-x-full"
         }`}

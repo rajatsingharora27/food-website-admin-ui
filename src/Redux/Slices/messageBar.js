@@ -7,7 +7,6 @@ const messageSlice = createSlice({
   },
   reducers: {
     addMessageToShow: (state, action) => {
-      // if(action.payload.)
       state.messageToDisplay = action.payload;
     },
   },

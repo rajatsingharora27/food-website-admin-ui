@@ -13,5 +13,5 @@ const store = configureStore({
     addMessageToShow: messageSlice,
   },
 });
-// some comment
+
 export default store;

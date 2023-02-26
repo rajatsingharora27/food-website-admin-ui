@@ -7,7 +7,6 @@ import { url } from "../../Utils/urlConfig";
 
 const CreateProduct = () => {
   const dispatch = useDispatch();
-  const [buttonDisabled, setButtonDisabled] = useState(true);
 
   const productToAdd = useSelector((store) => store.newProduct.product);
 

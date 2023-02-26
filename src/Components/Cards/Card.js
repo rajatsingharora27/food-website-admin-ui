@@ -29,7 +29,11 @@ const SmallCard = ({
         dispatch(updateProductDetails({ name: e.target.value }));
         break;
       case "price":
-        dispatch(updateProductDetails({ price: e.target.value }));
+        const isValid = /^\d*$/.test(e.target.value);
+        if (isValid) {
+          dispatch(updateProductDetails({ price: e.target.value }));
+        }
+
         break;
       case "description":
         dispatch(updateProductDetails({ description: e.target.value }));
@@ -83,11 +87,12 @@ const SmallCard = ({
                 )}
 
                 <input
-                  type="text"
+                  type={ele?.key === "price" ? "number" : "text "}
                   className="peer ml-3 block h-11 w-4/5 rounded border border-solid border-neutral-300 bg-white bg-clip-padding py-4 px-3 text-base font-normal leading-tight  ease-in-out placeholder:text-transparent focus:border-primary focus:bg-white"
                   id={ele?.id}
                   placeholder={ele?.placeholder}
                   onChange={handleChange(ele?.key)}
+                  // pattern={ele?.key === "price" ? "^[0-9]*$" : ""}
 
                   // onChange={getProductName}
                 />

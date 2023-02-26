@@ -1,15 +1,18 @@
-import React from "react";
+// import React from "react";
 
-import { Outlet } from "react-router-dom";
-import Mainlayout from "./Components/MainLayout/Mainlayout";
+// import Mainlayout from "./Components/MainLayout/Mainlayout";
+// // import { Provider, useSelector } from "react-redux";
+// // import store from "../../Redux/ReduxStore/Store";
+// const App = () => {
+//   return (
+//     <>
+//       {/* <Provider store={store}> */}
+//       <Mainlayout />
+//       {/* </Provider> */}
 
-const App = () => {
-  return (
-    <>
-      <Mainlayout />
-      {/* <Outlet /> */}
-    </>
-  );
-};
+//       {/* <Outlet /> */}
+//     </>
+//   );
+// };
 
-export default App;
+// export default App;

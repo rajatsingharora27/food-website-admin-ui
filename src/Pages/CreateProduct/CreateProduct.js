@@ -1,45 +1,107 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Card from "../../Components/Cards/Card";
-// import LargeCard from "../../Components/Cards/LargeCard";
+import { addMessageToShow } from "../../Redux/Slices/messageBar";
+import { url } from "../../Utils/urlConfig";
 
 const CreateProduct = () => {
+  const dispatch = useDispatch();
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+
   const productToAdd = useSelector((store) => store.newProduct.product);
 
-  const showPayload = async () => {
+  const createErrorList = (productToAdd) => {
+    let errorList = [];
+    if (productToAdd.name.trim().length === 0) {
+      errorList.push({
+        key: "name",
+        type: "error",
+        reason: "Name is required",
+      });
+    }
+    if (productToAdd.price.trim().length === 0) {
+      errorList.push({
+        key: "price",
+        type: "error",
+        reason: "Price is required",
+      });
+    }
+    if (productToAdd.description.trim().length === 0) {
+      errorList.push({
+        key: "description",
+        type: "error",
+        reason: "Description is required",
+      });
+    }
+    if (productToAdd.quantity.trim().length === 0) {
+      errorList.push({
+        key: "quantity",
+        type: "error",
+        reason: "Quantity is required",
+      });
+    }
+    return errorList;
+  };
+
+  const addProductToDatabase = async () => {
     console.log(productToAdd);
-    const res = await axios.post(
-      "http://localhost:3003/api/v1/addProduct",
-      productToAdd
-    );
-    console.log(res);
-    alert("Product added sussefully");
+    let errorList = createErrorList(productToAdd);
+    if (errorList.length > 0) {
+      dispatch(addMessageToShow(errorList));
+    } else {
+      try {
+        const response = await axios.post(url.createProduct, productToAdd);
+        if (response.data.statusCode === 201) {
+          dispatch(
+            addMessageToShow([
+              {
+                key: "productCreated",
+                type: "success",
+                reason: response.data.message,
+              },
+            ])
+          );
+        }
+      } catch (error) {
+        console.log(error.response.data.error.message);
+
+        if (error.response.data.error.statusCode === 400) {
+          dispatch(
+            addMessageToShow([
+              {
+                key: "DuplicateProduct",
+                type: "error",
+                reason: error.response.data.error.message,
+              },
+            ])
+          );
+        }
+      }
+      // const response = await axios.post(url.createProduct, productToAdd);
+      // console.log(response);
+
+      // setButtonDisabled(true);
+      // setTimeout(() => {
+      //   console.log("going to backend");
+      // }, 4000);
+      // setButtonDisabled(false);
+    }
   };
 
   const [dropDownData, setDropDownData] = useState([]);
   const getDropDownData = async () => {
-    console.log(
-      `${
-        process.env.TUILERIES_BASE_URL /
-        process.env.API_VERSION /
-        process.env.GET_ALL_CATEGORY
-      }`
-    );
-    const CategoryData = await axios.get(
-      "http://localhost:3003/api/v1/allCategory"
-    );
+    console.log(url);
+    const CategoryData = await axios.get(url.getALLCategory);
     setDropDownData(CategoryData?.data?.data);
   };
-
-  const createProduct = async () => {};
 
   useEffect(() => {
     getDropDownData();
   }, []);
 
   return (
-    <div className=" w-full h-full bg-[#f5f8fa] ">
+    <div className={`w-full h-full bg-[#f5f8fa] `}>
       <div className="flex justify-start m-5">
         <h1 className="font-sans font-bold text-2xl py-4 md:p-9  uppercase ">
           Product Form
@@ -82,14 +144,18 @@ const CreateProduct = () => {
                   informationText:
                     "A Product name is required and recomended to be unique",
                   placeholder: "Product Name",
-                  // onChangeInput: { handleInput },
                 },
                 {
                   label: "Price",
                   key: "price",
                   informationText: "Price is cumplusory field",
                   placeholder: "Enter Price",
-                  // onChangeInput: { handleInput },
+                },
+                {
+                  label: "Quantity",
+                  key: "quantity",
+                  informationText: "Quantity is cumplusory field",
+                  placeholder: "Enter Quantity",
                 },
               ],
             }}
@@ -100,9 +166,10 @@ const CreateProduct = () => {
         <button
           type="submit"
           className="text-white text-lg font-sans m-4 md:m-7 lg:m-8  bg-[var(--background-color)] rounded opacity-75 p-3 shadow-lg hover:bg-[#aef1da] transition-all ease-in-out"
-          onClick={showPayload}
+          onClick={addProductToDatabase}
         >
           Save Changes
+          {/* {buttonDisabled ? "Save Changes" : "Loading..."} */}
         </button>
       </div>
     </div>

@@ -1,7 +1,8 @@
+const baseURL =
+  process.env.REACT_APP_TUILERIES_BASE_URL + process.env.REACT_APP_API_VERSION;
+
 export const url = {
-  GET_ALL_CATEGORY: `${
-    process.env.TUILERIES_BASE_URL /
-    process.env.API_VERSION /
-    process.env.GET_ALL_CATEGORY
-  }`,
+  getALLCategory: baseURL + process.env.REACT_APP_GET_ALL_CATEGORY,
+  thumbnailImage: baseURL + process.env.REACT_APP_UPLOAD_THUMBNAIL_IMAGE,
+  createProduct: baseURL + process.env.REACT_APP_CREATE_PRODUCT,
 };

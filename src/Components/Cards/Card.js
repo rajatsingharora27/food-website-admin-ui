@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../../index.css";
 import axios from "axios";
 import { updateProductDetails } from "../../Redux/Slices/creatProduct";
 import { useDispatch } from "react-redux";
 import { url } from "../../Utils/urlConfig";
+import { FaRupeeSign } from "react-icons/fa";
 
 const SmallCard = ({
   title,
@@ -33,7 +34,9 @@ const SmallCard = ({
       case "description":
         dispatch(updateProductDetails({ description: e.target.value }));
         break;
-
+      case "quantity":
+        dispatch(updateProductDetails({ quantity: e.target.value }));
+        break;
       default:
         console.log(e.target.value);
     }
@@ -41,20 +44,13 @@ const SmallCard = ({
 
   const handleFileInputChange = (event) => {
     setSelectedFile(event.target.files[0]);
-    // console.log(event.target.files[0]);
-
-    // console.log(selectedFile);
   };
   const handleFileUpload = async (event) => {
     try {
       const formData = new FormData();
       formData.append("thumbNailImage", selectedFile);
-      const response = await axios.post(
-        "http://localhost:3003/api/v1/uploadImage",
-        formData
-      );
-
-      console.log(response.data.data);
+      const response = await axios.post(url.thumbnailImage, formData);
+      // console.log(response.data.data);
       dispatch(updateProductDetails({ thumbNailImage: response.data.data }));
     } catch (error) {
       console.error(error);
@@ -71,21 +67,32 @@ const SmallCard = ({
         {inputField?.inputArray.map((ele, i) => {
           return (
             <div className="flex flex-col px-4" key={i}>
-              <label
-                htmlFor={ele?.id}
-                className=" font-sans font-semibold text-black text-sm m-3 ml-0"
-              >
-                {ele?.label}
-              </label>
-              <input
-                type="text"
-                className="peer ml-3 block h-11 w-4/5 rounded border border-solid border-neutral-300 bg-white bg-clip-padding py-4 px-3 text-base font-normal leading-tight  ease-in-out placeholder:text-transparent focus:border-primary focus:bg-white"
-                id={ele?.id}
-                placeholder={ele?.placeholder}
-                onChange={handleChange(ele?.key)}
+              <div className="flex flex-row">
+                <label
+                  htmlFor={ele?.id}
+                  className=" font-sans font-semibold text-black text-sm m-3 ml-0"
+                >
+                  {ele?.label}
+                </label>
+                <span className="mt-3 text-red-500 pr-3">*</span>
+              </div>
 
-                // onChange={getProductName}
-              />
+              <div className="flex flex-row justify-start">
+                {ele?.key === "price" && (
+                  <FaRupeeSign className="flex justify-center my-3 mr-0" />
+                )}
+
+                <input
+                  type="text"
+                  className="peer ml-3 block h-11 w-4/5 rounded border border-solid border-neutral-300 bg-white bg-clip-padding py-4 px-3 text-base font-normal leading-tight  ease-in-out placeholder:text-transparent focus:border-primary focus:bg-white"
+                  id={ele?.id}
+                  placeholder={ele?.placeholder}
+                  onChange={handleChange(ele?.key)}
+
+                  // onChange={getProductName}
+                />
+              </div>
+
               <p className="font-sans font-medium text-gray-400 text-xs m-3">
                 {ele?.informationText}
               </p>
@@ -151,12 +158,12 @@ const SmallCard = ({
                   className="hidden"
                 />
               </label>
-              <button
+              <span
                 onClick={handleFileUpload}
-                className="my-5 text-white text-lg font-sans   bg-[var(--background-color)] rounded opacity-75 p-3 shadow-lg hover:bg-[#aef1da] transition-all ease-in-out"
+                className="my-5 text-white text-lg font-sans cursor-pointer  bg-[var(--background-color)] rounded opacity-75 p-3 shadow-lg hover:bg-[#aef1da] transition-all ease-in-out"
               >
                 Upload
-              </button>
+              </span>
             </div>
           )}
           {showDropDown && (
@@ -196,27 +203,3 @@ const SmallCard = ({
 };
 
 export default SmallCard;
-
-{
-  /* <FormControl variant="standard" sx={{ m: 1, minWidth: 80 }}>
-<InputLabel id="category">Category</InputLabel>
-<Select
-  labelId="category"
-  id="category"
-  label="Category"
-  onChange={handleSelection}
->
-  {dropDownData.map((category) => {
-    return (
-      <MenuItem
-        key={category._id}
-        value={category.name.toUpperCase()}
-        defaultValue=""
-      >
-        {category.name.toUpperCase()}
-      </MenuItem>
-    );
-  })}
-</Select>
-</FormControl> */
-}

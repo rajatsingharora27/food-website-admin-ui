@@ -30,8 +30,6 @@ const MessageBar = () => {
 
   return messageBarStatus.length > 0 ? (
     <div>
-      {console.log(messageBarStatus)}
-
       {messageBarStatus.map((ele, i) => {
         return (
           <div
@@ -46,7 +44,7 @@ const MessageBar = () => {
             <strong className="font-bold">
               {ele.type === "error" ? "Error :" : "Success "}
             </strong>
-            {console.log(ele)}
+
             <span className="block sm:inline">{ele.reason}</span>
           </div>
         );

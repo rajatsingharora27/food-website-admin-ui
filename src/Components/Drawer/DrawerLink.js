@@ -1,4 +1,5 @@
 import {
+  MdOutlineCategory,
   MdOutlineSpaceDashboard,
   MdProductionQuantityLimits,
 } from "react-icons/md";
@@ -15,5 +16,11 @@ export const drawerLinks = [
     icon: <MdProductionQuantityLimits />,
     title: "Create Product",
     link: "/createProduct",
+  },
+  {
+    id: 3,
+    icon: <MdOutlineCategory />,
+    title: "New Category",
+    link: "/createCategory",
   },
 ];

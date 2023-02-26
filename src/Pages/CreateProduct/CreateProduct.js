@@ -41,11 +41,17 @@ const CreateProduct = () => {
         reason: "Quantity is required",
       });
     }
+    if (productToAdd.typeOfproduct.trim().length === 0) {
+      errorList.push({
+        key: "typeOfproduct",
+        type: "error",
+        reason: "Category is required",
+      });
+    }
     return errorList;
   };
 
   const addProductToDatabase = async () => {
-    console.log(productToAdd);
     let errorList = createErrorList(productToAdd);
     if (errorList.length > 0) {
       dispatch(addMessageToShow(errorList));
@@ -78,20 +84,11 @@ const CreateProduct = () => {
           );
         }
       }
-      // const response = await axios.post(url.createProduct, productToAdd);
-      // console.log(response);
-
-      // setButtonDisabled(true);
-      // setTimeout(() => {
-      //   console.log("going to backend");
-      // }, 4000);
-      // setButtonDisabled(false);
     }
   };
 
   const [dropDownData, setDropDownData] = useState([]);
   const getDropDownData = async () => {
-    console.log(url);
     const CategoryData = await axios.get(url.getALLCategory);
     setDropDownData(CategoryData?.data?.data);
   };

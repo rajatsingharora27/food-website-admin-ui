@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Mainlayout from "../Components/MainLayout/Mainlayout";
+import Category from "../Pages/Category/Category";
 import CreateProduct from "../Pages/CreateProduct/CreateProduct";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 
@@ -17,6 +18,11 @@ const routerApp = createBrowserRouter([
       {
         path: "/createProduct",
         element: <CreateProduct />,
+      },
+      {
+        path: "/createCategory",
+
+        element: <Category />,
       },
     ],
   },

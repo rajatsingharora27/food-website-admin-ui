@@ -36,13 +36,13 @@ const DrawerComponet = () => {
   const handleCurrentActiveDispatch = (id) => {
     dispatch(changeActiveComponent(id));
   };
+
   const closeDrawer = () => {
     dispatch(changeOpenStatus(isSideBarOpen));
   };
 
   const handleClickOutside = (event) => {
     if (!ref.current.contains(event.target)) {
-      // console.log("clicked outside");
       if (isSideBarOpen) {
         dispatch(changeOpenStatus(isSideBarOpen));
       }
@@ -78,10 +78,6 @@ const DrawerComponet = () => {
           })}
         </div>
       </nav>
-
-      {/* {!isSideBarOpen && window.event.which === 1
-        ? closeSideBarOnMouseLeftClick()
-        : null} */}
     </>
   );
 };

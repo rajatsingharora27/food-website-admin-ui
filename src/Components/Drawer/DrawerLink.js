@@ -4,6 +4,8 @@ import {
   MdProductionQuantityLimits,
 } from "react-icons/md";
 
+import { RiFileList3Line } from "react-icons/ri";
+
 export const drawerLinks = [
   {
     id: 1,
@@ -22,5 +24,11 @@ export const drawerLinks = [
     icon: <MdOutlineCategory />,
     title: "New Category",
     link: "/createCategory",
+  },
+  {
+    id: 4,
+    icon: <RiFileList3Line />,
+    title: "Order",
+    link: "/orders",
   },
 ];

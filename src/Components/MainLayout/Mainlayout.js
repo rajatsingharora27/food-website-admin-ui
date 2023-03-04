@@ -9,6 +9,7 @@ import "../../index.css";
 import Drawer from "../Drawer/Drawer";
 import MessageBar from "../MessageBar/MessageBar";
 import { ChakraProvider } from "@chakra-ui/react";
+import TableShimmer from "../Shimmer/TableShimmer";
 
 const Mainlayout = () => {
   return (
@@ -18,8 +19,10 @@ const Mainlayout = () => {
           <NavBar />
           <MessageBar />
           <div className="w-full min-h-[90vh] flex ">
+            {/* <div className=" "> */}
             <Drawer />
             <Outlet />
+            {/* <TableShimmer /> */}
           </div>
         </ChakraProvider>
       </Provider>

@@ -45,38 +45,3 @@ const MessageBar = () => {
 };
 
 export default MessageBar;
-
-// <div className="flex flex-row justify-evenly w-full h-1/3 bg-red-300 text-white gap-2">
-//       <div className={` flex flex-col`}>
-//         {messageBarStatus.map((messageEle, i) => {
-//           return (
-//             <div className="flex flex-row" key={i}>
-//               <div>Icon </div>
-//               {console.log(messageEle, i)}
-//               <span className="text-white">{messageEle} </span>
-//             </div>
-//           );
-//         }) }
-//       </div>
-//       {scrollUpToPage()}
-//       <button onClick={hideMessageBar}> X</button>
-//     </div>
-//   ) : (
-//     <></>
-//   );
-
-{
-  /* <div
-            key={ele.key}
-            className={`flex flex-row justify-evenly w-full h-1/3 ${
-              ele.type === "error" ? `bg-red-300` : `bg-green-600`
-            } text-white gap-y-2`}
-          >
-            <div className="flex flex-row justify-start items-center">
-              <div>
-                <BiError className="" />
-              </div>
-              <div>{ele.reason}</div>
-            </div>
-          </div> */
-}

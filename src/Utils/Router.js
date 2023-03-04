@@ -4,6 +4,7 @@ import Mainlayout from "../Components/MainLayout/Mainlayout";
 import Category from "../Pages/Category/Category";
 import CreateProduct from "../Pages/CreateProduct/CreateProduct";
 import Dashboard from "../Pages/Dashboard/Dashboard";
+import Order from "../Pages/Order/Order";
 
 const routerApp = createBrowserRouter([
   {
@@ -21,8 +22,11 @@ const routerApp = createBrowserRouter([
       },
       {
         path: "/createCategory",
-
         element: <Category />,
+      },
+      {
+        path: "/orders",
+        element: <Order />,
       },
     ],
   },

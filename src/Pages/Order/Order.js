@@ -2,49 +2,25 @@ import React, { useEffect, useMemo } from "react";
 import { useTable } from "react-table";
 import axios from "axios";
 import TableShimmer from "../../Components/Shimmer/TableShimmer";
-
-const tableColumns = [
-  {
-    Header: "ID",
-    accessor: "id", // accessor is the "key" in the data
-  },
-  {
-    Header: "Customer Name",
-    accessor: "customerName",
-  },
-  {
-    Header: "Status",
-    accessor: "status",
-  },
-  {
-    Header: "Toatl Bill",
-    accessor: "totalBill",
-  },
-  {
-    Header: "Requested Slot",
-    accessor: "delevirySolt",
-  },
-  {
-    Header: "View",
-    accessor: "view",
-  },
-];
+import { useState } from "react";
+import { url } from "../../Utils/urlConfig";
+import { tableColumns } from "../../Utils/OrderTabelColums";
 
 const Order = () => {
-  const [shoShimmer, setShoShimmer] = React.useState(true);
-  const [orderData, setOrderData] = React.useState([]);
+  const [orderData, setOrderData] = useState([]);
 
   const columns = useMemo(() => tableColumns, []);
-  const data = useMemo(() => tableColumns, []);
+  const data = useMemo(() => [...orderData], [orderData]);
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ data: data, columns: columns });
+    useTable({ data, columns });
 
   useEffect(() => {
     const fetchData = async () => {
-      const orderData = await axios.get("http://localhost:3003/api/v1/orders");
-      if (orderData.status === 200) {
-        setShoShimmer(false);
-        setOrderData(orderData.data.data);
+      try {
+        const { data } = await axios.get(url.orderList);
+        setOrderData(data?.data[0].orders);
+      } catch (error) {
+        console.log(error);
       }
     };
     fetchData();
@@ -83,7 +59,7 @@ const Order = () => {
           </div>
         </div>
 
-        {shoShimmer ? (
+        {orderData.length === 0 ? (
           <TableShimmer />
         ) : (
           <div className="container max-w-full px-4 mx-auto sm:px-8">
@@ -113,8 +89,25 @@ const Order = () => {
                         );
                       })}
                     </thead>
-                    {/* <tbody>
-                      <tr>
+                    <tbody {...getTableBodyProps()}>
+                      {rows.map((row, i) => {
+                        prepareRow(row);
+                        return (
+                          <tr {...row.getRowProps()}>
+                            {row.cells.map((cell) => {
+                              return (
+                                <td
+                                  className="px-5 py-5 text-sm bg-white border-b border-gray-200"
+                                  {...cell.getCellProps()}
+                                >
+                                  {cell.render("Cell")}
+                                </td>
+                              );
+                            })}
+                          </tr>
+                        );
+                      })}
+                      {/* <tr>
                         <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
                           <div className="flex items-center">
                             <div className="flex-shrink-0">
@@ -301,8 +294,8 @@ const Order = () => {
                             Edit
                           </a>
                         </td>
-                      </tr>
-                    </tbody> */}
+                      </tr> */}
+                    </tbody>
                   </table>
                   <div className="flex flex-col items-center px-5 py-5 bg-white xs:flex-row xs:justify-between">
                     <div className="flex items-center">

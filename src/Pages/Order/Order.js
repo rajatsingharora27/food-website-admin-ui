@@ -106,7 +106,7 @@ const Order = () => {
                                 <th
                                   {...columns.getHeaderProps()}
                                   scope="col"
-                                  className="px-5 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-white border-b border-gray-200"
+                                  className="px-6 py-4   text-lg font-sans text-left text-gray-800 uppercase bg-white border-b border-gray-200"
                                 >
                                   {columns.render("Header")}
                                 </th>

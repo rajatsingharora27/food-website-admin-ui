@@ -1,3 +1,4 @@
+import { BiRupee } from "react-icons/bi";
 export const tableColumns = [
   {
     Header: "Order ID",
@@ -25,10 +26,17 @@ export const tableColumns = [
   {
     Header: "Toatl Bill",
     accessor: "totalBill",
+    Cell: ({ row }) => (
+      <span className="text-lg text-black flex flex-row ml-3">
+        <BiRupee className="text-xl mt-1" />{" "}
+        <div className="">{row?.values?.totalBill}</div>
+      </span>
+    ),
   },
   {
     Header: "Requested Slot",
     accessor: "delevirySolt",
+    Cell: ({ row }) => <div className="ml-6"> {row?.values?.delevirySolt}</div>,
   },
   {
     Header: "View",

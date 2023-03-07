@@ -1,4 +1,5 @@
 import { BiRupee } from "react-icons/bi";
+import { Link } from "react-router-dom";
 export const tableColumns = [
   {
     Header: "Order ID",
@@ -42,17 +43,20 @@ export const tableColumns = [
     Header: "View",
     accessor: "view",
     Cell: ({ row }) => (
-      <button
+      <Link
+        to={`/orders/${row?.cells[1]?.row?.original?._id}`}
+        state={row?.cells[1]?.row?.original}
+        // state={{ some: "value" }}
         onClick={() => handleView(row)}
         type="button"
         className="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-full"
       >
         View
-      </button>
+      </Link>
     ),
   },
 ];
 
 export const handleView = (cells) => {
-  console.log(cells?.cells[1]?.row?.original);
+  // console.log(cells?.cells[1]?.row?.original);
 };

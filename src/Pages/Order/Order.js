@@ -17,39 +17,33 @@ const Order = () => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ data, columns });
 
-  useEffect(() => {
-    const fetchQueryData = async () => {
-      // console.log("1");
-      const { data } = await axios.get(
-        `http://localhost:3003/api/v1/filter-orders?customerName=${searchQuery}`
-      );
-      if (searchQuery.length !== 0) {
-        // setFilteApplied(true);
-        setOrderData(data?.data);
-      }
-    };
-    if (searchQuery !== undefined) {
-      fetchQueryData();
+  const fetchQueryData = async () => {
+    const { data } = await axios.get(
+      `http://localhost:3003/api/v1/filter-orders?customerName=${searchQuery}`
+    );
+    if (searchQuery.length !== 0) {
+      setOrderData(data?.data);
     }
-  }, [searchQuery]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // console.log("2");
-        const { data } = await axios.get(url.orderList);
-        setOrderData(data?.data[0]?.orders);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []);
-
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
-    console.log(e.target.value);
   };
+  const fetchData = async () => {
+    try {
+      const { data } = await axios.get(url.orderList);
+      setOrderData(data?.data[0]?.orders);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    let timer;
+    if (searchQuery === undefined || searchQuery.length === 0) {
+      fetchData();
+    } else {
+      timer = setTimeout(() => fetchQueryData(), 200); //Debouncing
+    }
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [searchQuery]);
 
   return (
     <div className={`w-full h-full  `}>
@@ -67,7 +61,9 @@ const Order = () => {
                   id='"form-subscribe-Filter'
                   className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-500 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                   placeholder="name"
-                  onChange={handleSearch}
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
                   value={searchQuery}
                 />
               </div>

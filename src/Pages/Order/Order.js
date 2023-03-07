@@ -9,7 +9,7 @@ import { useSearchParams } from "react-router-dom";
 
 const Order = () => {
   const [orderData, setOrderData] = useState([]);
-  // const [filteApplied, setFilteApplied] = useState(false);
+  const [dataFetched, setDataFetched] = useState(true);
   const [searchParams] = useSearchParams();
   const columns = useMemo(() => tableColumns, []);
   const data = useMemo(() => [...orderData], [orderData]);
@@ -44,6 +44,15 @@ const Order = () => {
       clearTimeout(timer);
     };
   }, [searchQuery]);
+
+  useEffect(() => {
+    console.log(orderData, dataFetched);
+    if (orderData.length === 0) {
+      setDataFetched(false);
+    } else {
+      setDataFetched(true);
+    }
+  }, [orderData]);
 
   return (
     <div className={`w-full h-full  `}>
@@ -82,8 +91,10 @@ const Order = () => {
           </div>
         </div>
 
-        {orderData.length === 0 ? (
+        {orderData.length === 0 && dataFetched ? (
           <TableShimmer />
+        ) : dataFetched === false ? (
+          <h1>No Records found</h1>
         ) : (
           <div className="container max-w-full px-4 mx-auto sm:px-8">
             <div className="py-8">

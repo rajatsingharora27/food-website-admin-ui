@@ -57,6 +57,17 @@ export const tableColumns = [
   },
 ];
 
+export const tableColumsOrderDetails = [
+  {
+    Header: "Order ID",
+    accessor: "_id", // accessor is the "key" in the data
+  },
+  {
+    Header: "Customer Name",
+    accessor: "customerName",
+  },
+];
+
 export const handleView = (cells) => {
   // console.log(cells?.cells[1]?.row?.original);
 };

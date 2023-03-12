@@ -5,6 +5,7 @@ import { changeActiveComponent } from "../../Redux/Slices/activeComponet";
 import { drawerLinks } from "./DrawerLink";
 import { changeOpenStatus } from "../../Redux/Slices/sideBar";
 import { addMessageToShow } from "../../Redux/Slices/messageBar";
+import { logout } from "../../Redux/Slices/isAuthenticated";
 
 //bg-[var(--background-color)]
 const DrawerComponet = () => {
@@ -35,6 +36,9 @@ const DrawerComponet = () => {
 
   const handleCurrentActiveDispatch = (id) => {
     dispatch(changeActiveComponent(id));
+    if (id === 5) {
+      dispatch(logout());
+    }
   };
 
   const closeDrawer = () => {

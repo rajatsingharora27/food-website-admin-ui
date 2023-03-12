@@ -31,4 +31,10 @@ export const drawerLinks = [
     title: "Order",
     link: "/orders",
   },
+  {
+    id: 5,
+    icon: <RiFileList3Line />,
+    title: "Logout",
+    link: "/login",
+  },
 ];

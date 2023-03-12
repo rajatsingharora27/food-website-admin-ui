@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Mainlayout from "../Components/MainLayout/Mainlayout";
@@ -9,12 +10,11 @@ import Login from "../Pages/Login/Login";
 import Order from "../Pages/Order/Order";
 import PrivateRoute from "./PrivateRoutes";
 
-const isAutheicate = true;
 const routerApp = createBrowserRouter([
   {
     path: "/",
     element: (
-      <PrivateRoute isAuthenticated={isAutheicate}>
+      <PrivateRoute>
         <Mainlayout />
       </PrivateRoute>
     ),
@@ -42,7 +42,7 @@ const routerApp = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login isAuthenticated={isAutheicate} />,
+    element: <Login />,
   },
 ]);
 

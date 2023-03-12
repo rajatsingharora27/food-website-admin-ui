@@ -14,18 +14,18 @@ import TableShimmer from "../Shimmer/TableShimmer";
 const Mainlayout = () => {
   return (
     <div className=" overflow-y-hidden overflow-x-hidden">
-      <Provider store={store}>
-        <ChakraProvider>
-          <NavBar />
-          <MessageBar />
-          <div className="w-full min-h-[90vh] flex ">
-            {/* <div className=" "> */}
-            <Drawer />
-            <Outlet />
-            {/* <TableShimmer /> */}
-          </div>
-        </ChakraProvider>
-      </Provider>
+      {/* <Provider store={store}> */}
+      <ChakraProvider>
+        <NavBar />
+        <MessageBar />
+        <div className="w-full min-h-[90vh] flex ">
+          {/* <div className=" "> */}
+          <Drawer />
+          <Outlet />
+          {/* <TableShimmer /> */}
+        </div>
+      </ChakraProvider>
+      {/* </Provider> */}
     </div>
   );
 };

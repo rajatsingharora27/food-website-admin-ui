@@ -129,13 +129,13 @@ const OrderView = () => {
           <h1 className="font-sans text-2xl">Order Details</h1>
           <div>Bill break up</div>
         </div>
-        {/* <hr class="w-64 h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" /> */}
+
         <div className="m-5 flex flex-col justify-between">
           <div className=" my-5 flex-grow">
             <h2 className=" my-3 text-lg font-bold font-sans">
               Item's Ordered
             </h2>
-            <table className="table p-4 bg-white rounded-lg shadow">
+            <table className="table p-4 bg-white rounded-lg shadow ">
               <thead>
                 <tr>
                   <th className="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
@@ -152,6 +152,21 @@ const OrderView = () => {
                   </th>
                   <th className="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
                     Pieces
+                  </th>
+                  <th className="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
+                    Price
+                  </th>
+                  <th className="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
+                    Price
+                  </th>
+                  <th className="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
+                    Price
+                  </th>
+                  <th className="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
+                    Price
+                  </th>
+                  <th className="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
+                    Price
                   </th>
                   <th className="border p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
                     Price

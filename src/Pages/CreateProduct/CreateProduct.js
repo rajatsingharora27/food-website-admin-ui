@@ -1,3 +1,4 @@
+import { Button } from "@material-tailwind/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -97,78 +98,83 @@ const CreateProduct = () => {
   }, []);
 
   return (
-    <div className={`w-full h-full  `}>
-      <div className="flex justify-start m-5">
+    <>
+      <h1 className="font-sans font-bold text-bold pt-3 pl-6 uppercase ">
+        Product Form
+      </h1>
+      <div className="mt-8 flex flex-col justify-center items-center  md:flex-row ">
+        {/* <div className="flex justify-start m-5">
         <h1 className="font-sans font-bold text-2xl py-4 md:p-9  uppercase ">
           Product Form
         </h1>
-      </div>
-      <div className="flex flex-col md:flex-row justify-center ">
-        {/*-------------------------- Left column for small screens ------------------------*/}
-        <div className="flex flex-col">
-          <Card
-            title={"Product Details"}
-            showButton={true}
-            showDropDown={true}
-            showFieldDescription={true}
-            isThumbnailImage={false}
-            categoryDropDownData={dropDownData}
-          />
-          <Card
-            title={"Thumbnail Image"}
-            showButton={false}
-            showDropDown={false}
-            showFieldDescription={false}
-            isThumbnailImage={true}
-          />
+      </div> */}
+        <div className="flex flex-col md:flex-row justify-center gap-10">
+          {/*-------------------------- Left column for small screens ------------------------*/}
+          <div className="flex flex-col ">
+            <Card
+              title={"Basic Information"}
+              showButton={false}
+              showDropDown={false}
+              showFieldDescription={false}
+              isThumbnailImage={false}
+              isTextArea={true}
+              inputField={{
+                inputArray: [
+                  {
+                    id: "productName",
+                    label: "Product Name",
+                    key: "name",
+                    informationText:
+                      "A Product name is required and recomended to be unique",
+                    placeholder: "Product Name",
+                  },
+                  {
+                    label: "Price",
+                    key: "price",
+                    informationText: "Price is cumplusory field",
+                    placeholder: "Enter Price",
+                  },
+                  {
+                    label: "Quantity",
+                    key: "quantity",
+                    informationText: "Quantity is cumplusory field",
+                    placeholder: "Enter Quantity",
+                  },
+                ],
+              }}
+            />
+          </div>
+
+          {/* ------------------------------Righthand side------------------------------------- */}
+          <div className="flex flex-col gap-y-7 ">
+            <Card
+              title={"Product Details"}
+              showButton={true}
+              showDropDown={true}
+              showFieldDescription={true}
+              isThumbnailImage={false}
+              categoryDropDownData={dropDownData}
+            />
+            <Card
+              title={"Thumbnail Image"}
+              showButton={false}
+              showDropDown={false}
+              showFieldDescription={false}
+              isThumbnailImage={true}
+            />
+          </div>
         </div>
-        {/* ------------------------------Righthand side------------------------------------- */}
-        <div className="flex flex-col ">
-          <Card
-            title={"Basic Information"}
-            showButton={false}
-            showDropDown={false}
-            showFieldDescription={false}
-            isThumbnailImage={false}
-            isTextArea={true}
-            inputField={{
-              inputArray: [
-                {
-                  id: "productName",
-                  label: "Product Name",
-                  key: "name",
-                  informationText:
-                    "A Product name is required and recomended to be unique",
-                  placeholder: "Product Name",
-                },
-                {
-                  label: "Price",
-                  key: "price",
-                  informationText: "Price is cumplusory field",
-                  placeholder: "Enter Price",
-                },
-                {
-                  label: "Quantity",
-                  key: "quantity",
-                  informationText: "Quantity is cumplusory field",
-                  placeholder: "Enter Quantity",
-                },
-              ],
-            }}
-          />
-        </div>
       </div>
-      <div className=" flex justify-end  ">
-        <button
+      <div className=" flex justify-center ">
+        <Button
           type="submit"
-          className="text-white text-lg font-sans m-4 md:m-7 lg:m-8  bg-[var(--background-color)] rounded opacity-75 p-3 shadow-lg hover:bg-[#aef1da] transition-all ease-in-out"
+          className="text-white text-lg font-sans w-full md:w-1/2 m-4 md:m-7 lg:m-8  bg-[var(--background-color)] rounded opacity-75 p-3 shadow-lg hover:bg-[#aef1da] transition-all ease-in-out"
           onClick={addProductToDatabase}
         >
           Save Changes
-          {/* {buttonDisabled ? "Save Changes" : "Loading..."} */}
-        </button>
+        </Button>
       </div>
-    </div>
+    </>
   );
 };
 

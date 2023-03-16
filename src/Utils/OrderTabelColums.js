@@ -1,3 +1,4 @@
+import { Chip } from "@material-tailwind/react";
 import { BiRupee } from "react-icons/bi";
 import { Link } from "react-router-dom";
 export const tableColumns = [
@@ -13,15 +14,21 @@ export const tableColumns = [
     Header: "Status",
     accessor: "status",
     Cell: ({ row }) => (
-      <span
-        className={`px-4 py-2  text-base rounded-full ${
+      <Chip
+        variant="gradient"
+        className={` ${
           row?.values?.status === "delivered"
-            ? `text-green-600  bg-green-200`
-            : `text-yellow-600  bg-yellow-200`
+            ? "bg-green-400 px-4 py-2"
+            : "bg-yellow-400 px-4 py-2"
         }`}
-      >
-        {row?.values?.status}
-      </span>
+        value={row?.values?.status === "delivered" ? "Delivered" : "Pending"}
+        // className="py-0.5 px-2 text-[11px] font-medium"
+        // className={`px-4 py-2  text-base rounded-full ${
+        //   row?.values?.status === "delivered"
+        //     ? `text-green-600  bg-green-200`
+        //     : `text-yellow-600  bg-yellow-200`
+      />
+      // {row?.values?.status}
     ),
   },
   {
@@ -48,8 +55,8 @@ export const tableColumns = [
         state={row?.cells[1]?.row?.original}
         // state={{ some: "value" }}
         onClick={() => handleView(row)}
-        type="button"
-        className="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-full"
+        // type="button"
+        className="text-xs font-semibold text-blue-gray-600 text-cyan-400"
       >
         View
       </Link>

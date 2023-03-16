@@ -36,8 +36,10 @@ export const tableColumns = [
     accessor: "totalBill",
     Cell: ({ row }) => (
       <span className="text-lg text-black flex flex-row ml-3">
-        <BiRupee className="text-xl mt-1" />{" "}
-        <div className="">{row?.values?.totalBill}</div>
+        <BiRupee className=" mt-[9px] text-[11px] font-bold uppercase text-blue-gray-400" />{" "}
+        <div className="text-[11px] font-bold uppercase text-blue-gray-400">
+          {row?.values?.totalBill}
+        </div>
       </span>
     ),
   },

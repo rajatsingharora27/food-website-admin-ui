@@ -107,7 +107,7 @@ const Order = () => {
             No Records found 😔{" "}
           </Typography>
         ) : (
-          <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
+          <CardBody className="overflow-x-scroll mx-2 pt-0 pb-2">
             <table className="w-full min-w-[640px] table-auto">
               <thead {...getTableProps}>
                 {headerGroups.map((headerGroups) => {
@@ -118,7 +118,7 @@ const Order = () => {
                           <th
                             {...columns.getHeaderProps()}
                             scope="col"
-                            className="border-b border-blue-gray-50 py-3 px-5 text-left"
+                            className="border-b border-blue-gray-50 py-3  text-left"
                           >
                             <Typography
                               variant="small"
@@ -141,7 +141,7 @@ const Order = () => {
                       {row.cells.map((cell) => {
                         return (
                           <td
-                            className="px-5 py-5 text-sm bg-white border-b border-gray-200"
+                            className=" py-5 text-sm bg-white border-b border-gray-200"
                             {...cell.getCellProps()}
                           >
                             <Typography className="text-xs font-semibold text-blue-gray-600">

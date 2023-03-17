@@ -16,10 +16,10 @@ export const tableColumns = [
     Cell: ({ row }) => (
       <Chip
         variant="gradient"
-        className={` ${
+        className={`py-0.5 px-2 text-[11px] font-medium ${
           row?.values?.status === "delivered"
-            ? "bg-green-400 px-4 py-2"
-            : "bg-yellow-400 px-4 py-2"
+            ? "bg-green-400 "
+            : "bg-yellow-400 "
         }`}
         value={row?.values?.status === "delivered" ? "Delivered" : "Pending"}
         // className="py-0.5 px-2 text-[11px] font-medium"

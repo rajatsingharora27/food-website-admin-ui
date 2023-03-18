@@ -219,7 +219,7 @@ const OrderView = () => {
 
           {/* <div className=""> */}
           {/* --------------------Contact Details------------------------- */}
-          <Card className=" shadow-lg gap-y-3 py-5 col-span-2 md:col-span-2 h-[467px] ">
+          <Card className="w-full shadow-lg gap-y-3 py-5 col-span-2 md:col-span-2 h-[467px] ">
             <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-4 pb-0 flex">
               <div className="flex flex-col">
                 <Typography variant={"h1"} className="text-xl font-sans">
@@ -249,7 +249,7 @@ const OrderView = () => {
             </div>
           </Card>
           {/*-------------------- Cost Breakup------------------ */}
-          <Card className=" shadow-lg gap-y-3 py-5 col-span-2 md:col-span-2">
+          <Card className=" w-full shadow-lg gap-y-3 py-5 col-span-2 md:col-span-2">
             <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-4 pb-0 flex">
               <div class="inline-flex items-center bg-white leading-none text-white rounded-full p-2 shadow text-teal text-sm">
                 <span class="inline-flex bg-green-600 text-white rounded-full h-6 px-3 justify-center items-center"></span>
@@ -301,7 +301,7 @@ const OrderView = () => {
             </div>
           </Card>
           {/* ---------------Order Time Line-----------------------*/}
-          <Card className="col-span-3">
+          <Card className="  col-span-2 md:col-span-4">
             <CardHeader
               floated={false}
               shadow={false}
@@ -323,8 +323,117 @@ const OrderView = () => {
               </Typography>
             </CardHeader>
             <CardBody className="pt-0 flex ">
-              <div className="flex ">{ordersOverviewData[0].description}</div>
-              <div className="flex ">{ordersOverviewData[0].description}</div>
+              <ol class="border-l border-neutral-300 dark:border-neutral-500 md:flex md:justify-center md:gap-6 md:border-l-0 md:border-t">
+                <li>
+                  <div class="flex-start flex items-center pt-2 md:block md:pt-0">
+                    <div class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-green-600 dark:bg-neutral-500 md:ml-0 md:mr-0 md:-mt-[5px]"></div>
+                    <p class="mt-2 text-sm text-neutral-500 dark:text-neutral-300">
+                      01.07.2021
+                    </p>
+                  </div>
+                  <div class="mt-2 ml-4 pb-5 md:ml-0">
+                    <h4 class="mb-1.5 text-xl font-semibold">
+                      Title of section 1
+                    </h4>
+                    <p class="mb-3 text-neutral-500 dark:text-neutral-300">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Quisque scelerisque diam non nisi semper, et elementum
+                      lorem ornare. Maecenas placerat facilisis mollis. Duis
+                      sagittis ligula in sodales vehicula.
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex-start flex items-center pt-2 md:block md:pt-0">
+                    <div class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-neutral-300 dark:bg-neutral-500 md:ml-0 md:mr-0 md:-mt-[5px]"></div>
+                    <p class="mt-2 text-sm text-neutral-500 dark:text-neutral-300">
+                      13.09.2021
+                    </p>
+                  </div>
+                  <div class="mt-2 ml-4 pb-5 md:ml-0">
+                    <h4 class="mb-1.5 text-xl font-semibold">
+                      Title of section 2
+                    </h4>
+                    <p class="mb-3 text-neutral-500 dark:text-neutral-300">
+                      Libero expedita explicabo eius fugiat quia aspernatur
+                      autem laudantium error architecto recusandae natus
+                      sapiente sit nam eaque, consectetur porro molestiae ipsam
+                      an deleniti.
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex-start flex items-center pt-2 md:block md:pt-0">
+                    <div class="-ml-[5px] mr-3 h-[9px] w-[9px] rounded-full bg-neutral-300 dark:bg-neutral-500 md:ml-0 md:mr-0 md:-mt-[5px]"></div>
+                    <p class="mt-2 text-sm text-neutral-500 dark:text-neutral-300">
+                      25.11.2021
+                    </p>
+                  </div>
+                  <div class="mt-2 ml-4 pb-5 md:ml-0">
+                    <h4 class="mb-1.5 text-xl font-semibold">
+                      Title of section 3
+                    </h4>
+                    <p class="mb-3 text-neutral-500 dark:text-neutral-300">
+                      Voluptatibus temporibus esse illum eum aspernatur, fugiat
+                      suscipit natus! Eum corporis illum nihil officiis tempore.
+                      Excepturi illo natus libero sit doloremque, laborum
+                      molestias rerum pariatur quam ipsam necessitatibus
+                      incidunt, explicabo.
+                    </p>
+                  </div>
+                </li>
+              </ol>
+
+              {/* <div className="flex "> */}
+              {/* <div
+                  className={`border-l border-neutral-300 dark:border-neutral-500 md:flex md:justify-center md:gap-6 md:border-l-0 md:border-t`}
+                >
+                  {React.createElement(ordersOverviewData[0].icon, {
+                    className: `!w-5 !h-5 bg-red-500 rounded-full ${"after:w-6"}`,
+                  })}
+                  <div>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="block font-medium"
+                    >
+                      {ordersOverviewData[0].title}
+                    </Typography>
+                    <Typography
+                      as="span"
+                      variant="small"
+                      className="text-xs font-medium text-blue-gray-500"
+                    >
+                      {ordersOverviewData[0].description}
+                    </Typography>
+                  </div>
+                </div>
+
+                <div
+                  className={`border-l border-neutral-300 dark:border-neutral-500 md:flex md:justify-center md:gap-6 md:border-l-0 md:border-t`}
+                >
+                  {React.createElement(ordersOverviewData[0].icon, {
+                    className: `!w-5 !h-5 bg-red-500 rounded-full ${"after:w-6"}`,
+                  })}
+                  <div>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="block font-medium"
+                    >
+                      {ordersOverviewData[0].title}
+                    </Typography>
+                    <Typography
+                      as="span"
+                      variant="small"
+                      className="text-xs font-medium text-blue-gray-500"
+                    >
+                      {ordersOverviewData[0].description}
+                    </Typography>
+                  </div>
+                </div> */}
+              {/* </div> */}
+
               {/* {ordersOverviewData.map(
                 ({ icon, color, title, description }, key) => (
                   <div key={title} className="flex items-start gap-4 py-3">

@@ -122,9 +122,10 @@ const DrawerComponet = () => {
                         fullWidth
                       >
                         <span
-                          className={`${
-                            currentActive === id ? "text-black" : ""
-                          }`}
+                          className="text-black"
+                          // className={`${
+                          //   currentActive === id ? "text-black" : ""
+                          // }`}
                         >
                           {icon}
                         </span>

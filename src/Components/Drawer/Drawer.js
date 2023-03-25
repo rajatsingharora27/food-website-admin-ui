@@ -46,7 +46,7 @@ const DrawerComponet = () => {
 
   const handleCurrentActiveDispatch = (id) => {
     dispatch(changeActiveComponent(id));
-    if (id === 5) {
+    if (id === 6) {
       dispatch(logout());
     }
   };

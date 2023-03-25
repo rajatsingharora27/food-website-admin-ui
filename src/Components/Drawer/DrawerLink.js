@@ -6,6 +6,7 @@ import {
 } from "react-icons/md";
 
 import { RiFileList3Line } from "react-icons/ri";
+import { AiFillGolden } from "react-icons/ai";
 
 export const drawerLinks = [
   {
@@ -35,14 +36,14 @@ export const drawerLinks = [
         title: "Order",
         link: "/orders",
       },
-      // {
-      //   id: 4,
-      //   icon: <RiFileList3Line />,
-      //   title: "Inventory",
-      //   link: "/orders",
-      // },
       {
         id: 5,
+        icon: <AiFillGolden />,
+        title: "Inventory",
+        link: "/inventory",
+      },
+      {
+        id: 6,
         icon: <BiLogOut />,
         title: "Logout",
         link: "/login",

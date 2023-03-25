@@ -6,6 +6,7 @@ import OrderView from "../Components/OrderView/OrderView";
 import Category from "../Pages/Category/Category";
 import CreateProduct from "../Pages/CreateProduct/CreateProduct";
 import Dashboard from "../Pages/Dashboard/Dashboard";
+import Inventory from "../Pages/Inventory/Inventory";
 import Login from "../Pages/Login/Login";
 import Order from "../Pages/Order/Order";
 import PrivateRoute from "./PrivateRoutes";
@@ -37,7 +38,14 @@ const routerApp = createBrowserRouter([
         element: <Order />,
       },
 
-      { path: "/orders/:orderId", element: <OrderView /> },
+      {
+        path: "/orders/:orderId",
+        element: <OrderView />,
+      },
+      {
+        path: "/inventory",
+        element: <Inventory />,
+      },
     ],
   },
   {
